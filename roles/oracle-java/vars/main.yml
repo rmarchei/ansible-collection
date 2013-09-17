@@ -1,4 +1,4 @@
-# file: roles/java/vars/main.yml
+# file: roles/oracle-java/vars/main.yml
 ---
 java_version: 7u40-b43 # in the form "7u40-b43"
 java_tar: "{{ java_type }}-{{ java_version.split('-')[0] }}-{{ ansible_system|lower }}-{{ java_arch }}.tar.gz" # jdk-7u40-linux-x64.tar.gz

@@ -1,0 +1,46 @@
+# file: roles/java/tasks/main.yml
+---
+- name: Java | Downloading Oracle Java SE {{ java_type|upper }} {{ java_version }}
+  command: >
+    chdir={{ java_tmpdir }}
+    creates={{ java_tmpdir }}/{{ java_tar }}
+    /usr/bin/curl -s -L
+    -o {{ java_tmpdir }}/{{ java_tar }}
+    {{ curl_opts|default('') }}
+    {{ java_url }}
+  tags:
+    - oracle
+    - java
+    - download
+
+- name: Java | Checking Oracle Java SE {{ java_type|upper }} {{ java_version }} directory
+  shell: >
+    /bin/tar -tzf {{ java_tmpdir }}/{{ java_tar }}
+    --transform="s/\/$//" --show-transformed-names
+    | head -n 1
+  register: tar_dir_name
+  changed_when: false
+  tags:
+    - oracle
+    - java
+
+- name: Java | Cannot find Oracle Java SE {{ java_type|upper }} {{ java_version }} directory
+  fail: msg=Java | Cannot find Oracle Java SE {{ java_type|upper }} {{ java_version }} directory
+  when: "{{ tar_dir_name.stdout|length }} == 0"
+
+- name: Java | Extracting Oracle Java SE {{ java_type|upper }} {{ java_version }} in {{ java_dest }}
+  command: >
+    chdir={{ java_dest }}
+    creates={{ java_dest }}/{{ tar_dir_name.stdout }}
+    /bin/tar -xzf {{ java_tmpdir }}/{{ java_tar }}
+    -C {{ java_dest }}
+  tags:
+    - oracle
+    - java
+
+- name: Java | Symlinking Oracle Java SE {{ java_type|upper }} {{ java_version }} to {{ java_symlink }}
+  file: src={{ java_dest }}/{{ tar_dir_name.stdout }} path={{ java_symlink }} state=link
+  tags:
+    - oracle
+    - java
+

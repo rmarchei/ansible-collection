@@ -9,3 +9,4 @@ java_type: server-jre # jdk, jre or server-jre
 java_tmpdir: /tmp
 java_dest: /usr/local/share
 java_symlink: /opt/java
+proxy_env: {}

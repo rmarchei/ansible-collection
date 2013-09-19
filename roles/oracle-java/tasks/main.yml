@@ -8,6 +8,7 @@
     -o {{ java_tmpdir }}/{{ java_tar }}
     {{ curl_opts|default('') }}
     {{ java_url }}
+  environment: "{{ proxy_env|default('{}') }}"
   tags:
     - oracle
     - java
@@ -17,6 +18,7 @@
   shell: >
     /bin/tar -tzf {{ java_tmpdir }}/{{ java_tar }}
     --transform="s/\/$//" --show-transformed-names
+    2>/dev/null
     | head -n 1
   register: tar_dir_name
   changed_when: false

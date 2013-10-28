@@ -1,0 +1,14 @@
+# file: roles/epel/tasks/main.yml
+---
+
+- name: EPEL | Copying EPEL repo file
+  copy: src=epel{{ ansible_distribution_version[0] }}.repo dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644 backup=yes
+  tags:
+    - epel
+    - repo
+
+- name: EPEL | Installing EPEL RPM
+  yum: name=epel-release state=installed disable_gpg_check=yes
+  tags:
+    - epel
+    - packages

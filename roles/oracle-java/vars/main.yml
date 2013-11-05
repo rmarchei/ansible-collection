@@ -1,8 +1,8 @@
 ---
 # file: roles/oracle-java/vars/main.yml
 
-java_version: 7u40-b43 # in the form "7u40-b43"
-java_tar: "{{ java_type }}-{{ java_version.split('-')[0] }}-{{ ansible_system|lower }}-{{ java_arch }}.tar.gz" # jdk-7u40-linux-x64.tar.gz
+java_version: 7u45-b18 # in the form "7u45-b18"
+java_tar: "{{ java_type }}-{{ java_version.split('-')[0] }}-{{ ansible_system|lower }}-{{ java_arch }}.tar.gz" # jdk-7u45-linux-x64.tar.gz
 java_url: http://download.oracle.com/otn-pub/java/jdk/{{ java_version }}/{{ java_tar }}
 curl_opts: "-H 'Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com'"
 java_arch: x64 # i568 or x64

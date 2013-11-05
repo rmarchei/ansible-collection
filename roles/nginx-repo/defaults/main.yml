@@ -1,4 +1,0 @@
----
-# file: roles/nginx-repo/defaults/main.yml
-
-nginx_key: /etc/pki/rpm-gpg/RPM-GPG-KEY-nginx

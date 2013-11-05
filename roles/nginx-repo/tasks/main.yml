@@ -7,9 +7,5 @@
   yum: name={{ nginx_release_rpm }} state=present disable_gpg_check=yes
   register: nginx_release
 
-- name: nginx-repo | Importing GPG key
-  command: /bin/rpm --quiet --import {{ nginx_key }}
-  when: nginx_release.changed
-
-- name: nginx-repo | Enabling GPG check
-  lineinfile: dest=/etc/yum.repos.d/nginx.repo regexp=^gpgcheck line=gpgcheck=1
+- name: nginx-repo | Adding nginx repo file
+  template: src=nginx.repo.j2 dest=/etc/yum.repos.d/nginx.repo owner=root group=root mode=0644

@@ -1,0 +1,8 @@
+# nginx.repo
+
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/{{ distribution[ansible_distribution] }}/$releasever/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-nginx
+enabled=1

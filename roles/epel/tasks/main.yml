@@ -1,5 +1,5 @@
-# file: roles/epel/tasks/main.yml
 ---
+# file: roles/epel/tasks/main.yml
 
 - name: EPEL | Copying EPEL repo file
   copy: src=epel{{ ansible_distribution_version[0] }}.repo dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644 backup=yes

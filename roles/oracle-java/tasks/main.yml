@@ -1,5 +1,6 @@
-# file: roles/oracle-java/tasks/main.yml
 ---
+# file: roles/oracle-java/tasks/main.yml
+
 - name: Java | Downloading Oracle Java SE {{ java_type|upper }} {{ java_version }}
   command: >
     chdir={{ java_tmpdir }}

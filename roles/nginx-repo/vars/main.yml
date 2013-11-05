@@ -1,0 +1,9 @@
+---
+# file: roles/nginx-repo/vars/main.yml
+
+distribution:
+  CentOS: centos
+  RedHat: rhel
+
+
+nginx_release_rpm: http://nginx.org/packages/{{ distribution[ansible_distribution] }}/{{ ansible_distribution_version[0] }}/noarch/RPMS/nginx-release-{{ distribution[ansible_distribution] }}-{{ ansible_distribution_version[0] }}-0.el{{ ansible_distribution_version[0] }}.ngx.noarch.rpm

@@ -1,0 +1,15 @@
+---
+# file: roles/nginx-repo/tasks/main.yml
+
+# Install the Nginx RPM repository
+
+- name: nginx-repo | Installing nginx-release RPM
+  yum: name={{ nginx_release_rpm }} state=present disable_gpg_check=yes
+  register: nginx_release
+
+- name: nginx-repo | Importing GPG key
+  command: /bin/rpm --quiet --import {{ nginx_key }}
+  when: nginx_release.changed
+
+- name: nginx-repo | Enabling GPG check
+  lineinfile: dest=/etc/yum.repos.d/nginx.repo regexp=^gpgcheck line=gpgcheck=1
